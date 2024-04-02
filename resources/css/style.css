@@ -6,3 +6,10 @@
 .delete-button:hover {
     background-color: rgb(235, 159, 159);
 }
+
+body {
+    background-image: url("../img/download.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}

@@ -1,4 +1,3 @@
-import * as hype from "./hypeUtility.js";
 import { post } from "./data.js";
 
 const { createApp } = Vue;
@@ -6,7 +5,7 @@ const { createApp } = Vue;
 createApp({
     data() {
         return {
-            list: '',
+            list: 'all',
             post: post,
             newPostText: '',
         }
@@ -30,19 +29,36 @@ createApp({
             }
         },
         addPost() {
+            let maxId = 0;
+            this.post.forEach((el) => {
+                if (el.id >= maxId) {
+                    maxId = el.id + 1;
+                }
+            });
             const newPost = {
-                id: 0,
+                id: maxId,
                 text: this.newPostText,
                 done: false
-            }
-            post.forEach((el) => el.id >= newPost.id ? newPost.id = el.id + 1 : "");
+            };
+            this.post.push(newPost);
             this.newPostText = '';
-            post.push(newPost);
             console.log(this.post);
         }
     },
 
     computed: {
+        filteredPost() {
+            return this.post.filter(el => {
+                if (this.list === 'all') {
+                    return true
+                } else if (this.list === "completed") {
+                    return el.done === true
+                } else {
+                    return el.done === false
+                }
+            })
+        }
+
 
     }
 
