@@ -8,6 +8,7 @@ createApp({
         return {
             list: '',
             post: post,
+            newPostText: '',
         }
     },
     methods: {
@@ -28,6 +29,17 @@ createApp({
                 this.post.splice(index, 1)
             }
         },
+        addPost() {
+            const newPost = {
+                id: 0,
+                text: this.newPostText,
+                done: false
+            }
+            post.forEach((el) => el.id >= newPost.id ? newPost.id = el.id + 1 : "");
+            this.newPostText = '';
+            post.push(newPost);
+            console.log(this.post);
+        }
     },
 
     computed: {
