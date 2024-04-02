@@ -23,7 +23,7 @@
     <header class="bg-light p-4">
       <img src="../resources/img/logo.png" alt="logo">
 
-      <select name="done" id="done" v-model="done">
+      <select name="list" id="list" v-model="done">
         <option value="">Tutto</option>
         <option value="true">Fatto</option>
         <option value="false">Da Fare</option>
@@ -33,9 +33,14 @@
       <h1>Lista di disintossicazione del Weekend Pasquale</h1>
       <div class="input-group mb-3" v-for="(value, index) in post" :key="value.id">
         <div class="input-group-text">
-          <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
+          <input class="form-check-input mt-0" role="button" type="checkbox"
+            aria-label="Checkbox for following text input" @change="selectPost(value.id)">
         </div>
-        <input type="text" class="form-control" aria-label="Text input with checkbox" v-model="value.text" disabled>
+        <div class="input-group-text delete-button" role="button">
+          <i class="fa-regular fa-trash-can text-danger " @click="removePost(value.id)"></i>
+        </div>
+        <input type="text" class="form-control" aria-label="Text input with checkbox"
+          :class="value.done?'bg-success-subtle':'bg-danger-subtle '" v-model="value.text" disabled>
       </div>
       <div>
         <h2>Inserisci Todo</h2>
