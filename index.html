@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="resources/css/style.css">
   <link rel="stylesheet" href="resources/css/animation.css">
   <link rel="stylesheet" href="resources/css/media-query.css">
+  <script src="https://unpkg.com/axios@1.6.7/dist/axios.min.js"></script>
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
   <script src="resources/js/script.js" type="module"></script>
   <title>Document</title>
@@ -20,29 +21,33 @@
 
 <body class="bg-dark">
   <div id="app">
-    <header class="bg-light p-3 d-flex justify-content-between align-items-center ">
-      <img src="../resources/img/logo.png" alt="logo">
+    <div class="bg-light p-3 ">
+      <header class="container d-flex justify-content-between align-items-center ">
+        <img src="resources/img/logo.png" alt="logo">
 
-      <select name="list" id="list" v-model="list">
-        <option value="all">Tutto</option>
-        <option value="completed">Fatto</option>
-        <option value="not-completed">Da Fare</option>
-      </select>
-    </header>
+        <select name="list" id="list" v-model="list">
+          <option value="all">Tutto</option>
+          <option value="completed">Fatto</option>
+          <option value="not-completed">Da Fare</option>
+        </select>
+      </header>
+    </div>
+
     <main class="container my-5 p-5 text-white border-2 border-black rounded-4">
-      <h1 class="text-center mb-3">Lista di disintossicazione del Weekend Pasquale</h1>
-      <div class="input-group mb-3 shadow " v-for="(value, index) in filteredPost" :key="value.id">
-        <div class="input-group-text border border-2 border-dark">
+      <h1 class="text-center mb-3">Tasks gironaliere disintossicazione del Weekend Pasquale</h1>
+      <div class="input-group mb-3 shadow d-flex w-100" v-for="(value, index) in post" :key="value.id">
+        <div class="input-group-text border border-2 w-10 border-dark d-flex justify-content-center ">
           <input class="form-check-input mt-0" role="button" type="checkbox"
             aria-label="Checkbox for following text input" @change="selectPost(value.id)">
         </div>
-        <div class="input-group-text delete-button border border-2 border-start-0 border-dark"
+        <div
+          class="input-group-text delete-button border border-2 border-start-0 w-10 border-dark d-flex justify-content-center "
           @click="removePost(value.id)" role="button">
           <i class="fa-regular fa-trash-can text-danger "></i>
         </div>
-        <input type="text" class="form-control border-2 border-dark border-start-0"
-          aria-label="Text input with checkbox" :class="value.done?'bg-success-subtle':'bg-danger-subtle '"
-          v-model="value.text" disabled>
+        <h6 class="w-80 border-2 border-dark border text-black border-start-0 mb-0 p-1"
+          :class="value.done?'bg-success-subtle':'bg-danger-subtle '">
+          {{value.text}}</h6>
       </div>
       <div>
         <h2 class="mt-5">Inserisci un nuovo step verso la purificazione</h2>

@@ -13,3 +13,11 @@ body {
     background-attachment: fixed;
     background-size: cover;
 }
+
+.w-10 {
+    width: 50px !important;
+}
+
+.w-80 {
+    width: calc(100% - 100px) !important;
+}
